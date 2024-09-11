@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+
+class ChecklistPage extends StatefulWidget {
+  @override
+  _ChecklistPageState createState() => _ChecklistPageState();
+}
+
+class _ChecklistPageState extends State<ChecklistPage> {
+  // Example list of checklist items
+  List<ChecklistItem> checklistItems = [
+    ChecklistItem(title: 'Item 1'),
+    ChecklistItem(title: 'Item 2'),
+    ChecklistItem(title: 'Item 3'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Checklist'),
+      ),
+      body: ListView.builder(
+        itemCount: checklistItems.length,
+        itemBuilder: (context, index) {
+          return CheckboxListTile(
+            title: Text(checklistItems[index].title),
+            value: checklistItems[index].isChecked,
+            onChanged: (bool? isChecked) {
+              setState(() {
+                checklistItems[index].isChecked = isChecked!;
+              });
+            },
+          );
+        },
+      ),
+    );
+  }
+}
